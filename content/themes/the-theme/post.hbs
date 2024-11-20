@@ -1,0 +1,141 @@
+{{!< default}}
+
+<main class="gh-main">
+    {{#post}}
+        <article class="gh-article {{post_class}}">
+
+            <header class="gh-article-header gh-canvas">
+                {{#if primary_tag}}
+                    <a class="gh-article-tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+                {{/if}}
+
+                <h1 class="gh-article-title">{{title}}</h1>
+
+                {{#if custom_excerpt}}
+                    <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+                {{/if}}
+
+                {{> "feature-image"}}
+            </header>
+
+            <section class="gh-content gh-canvas">
+                {{content}}
+            </section>
+
+            <div class="gh-social-links gh-canvas" style="text-align: center; margin-bottom: 30px;">
+                <div class="gh-social-inner" style="display: inline-block; margin-top: 15px;">
+                    <h3 class="gh-social-title">Share this post</h3>
+                    <div class="gh-social-buttons" style="display: flex; justify-content: center; gap: 40px; margin-top: 15px;">
+                        <a href="https://twitter.com/intent/tweet?url={{url absolute="true"}}&text={{title}}" target="_blank" rel="noopener noreferrer" class="gh-social-button twitter" style="color: #000; display: inline-flex; align-items: center; gap: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" target="_blank" rel="noopener noreferrer" class="gh-social-button facebook" style="color: #000; display: inline-flex; align-items: center; gap: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>                           
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{url absolute="true"}}&title={{title}}" target="_blank" rel="noopener noreferrer" class="gh-social-button linkedin" style="color: #000; display: inline-flex; align-items: center; gap: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Author Info with Feature Image -->
+            <div style="text-align: center; padding: 20px 0; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; margin: 0 auto 40px;">
+                <!-- Author and Date -->
+                <div style="display: inline-flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div class="gh-author-image-list" style="display: flex;">
+                        {{#foreach authors}}
+                            <a class="gh-author-image" href="{{url}}" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; margin-right: -10px;">
+                                {{#if profile_image}}
+                                    <img src="{{profile_image}}" alt="{{name}}" style="width: 100%; height: 100%; object-fit: cover;">
+                                {{/if}}
+                            </a>
+                        {{/foreach}}
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+                        <div class="gh-author-name-list" style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">
+                            {{#foreach authors}}
+                                <a href="{{url}}" style="color: #000; text-decoration: none;">{{name}}</a>
+                                {{#unless @last}},{{/unless}}
+                            {{/foreach}}
+                        </div>
+                        
+                        <div class="gh-article-meta" style="color: #666; font-size: 14px;">
+                            <time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+                            {{#if reading_time}}
+                                <span>•</span>
+                                <span>{{reading_time minute="1 min" minutes="% min"}}</span>
+                            {{/if}}
+                        </div>
+
+                        <div class="gh-author-bio" style="color: #666; font-size: 14px; text-align: left; max-width: 600px;">
+                            {{#foreach authors}}
+                                {{#if bio}}
+                                    <p>{{bio}}</p>
+                                {{/if}}
+                            {{/foreach}}
+                        </div>
+
+                        <!-- New social media section -->
+                        {{!-- <div class="gh-author-social" style="display: flex; gap: 15px; margin-top: 10px;">
+                            {{#foreach authors}}
+                                {{#if twitter}}
+                                    <a href="{{twitter}}" target="_blank" rel="noopener noreferrer" style="color: #000;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                                    </a>
+                                {{/if}}
+                                {{#if facebook_url}}
+                                    <a href="{{facebook_url}}" target="_blank" rel="noopener noreferrer" style="color: #000;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                                    </a>
+                                {{/if}}
+                                {{#if website}}
+                                    <a href="{{website}}" target="_blank" rel="noopener noreferrer" style="color: #000;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: currentColor;"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239h-2.994zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-7.241 13.56c-.244-1.039-.398-2.136-.456-3.279h2.994v3.057c-.865.034-1.714.102-2.538.222zm2.538 1.776v3.62c-.798-.959-1.458-2.126-1.957-3.456.638-.083 1.291-.136 1.957-.164zm-2.994-7.055c.057-1.128.207-2.212.446-3.239.827.121 1.68.19 2.548.224v3.015h-2.994zm1.024-5.179c.5-1.346 1.165-2.527 1.97-3.496v3.661c-.671-.028-1.329-.081-1.97-.165zm-2.005-.35c-.708-.165-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.29-2.146-.496.844-.927 1.762-1.272 2.753zm-.549 1.918c-.264 1.151-.434 2.36-.492 3.611h-3.933c.165-1.658.739-3.197 1.617-4.518.88.361 1.816.67 2.808.907zm.009 9.262c-.988.236-1.92.542-2.797.9-.89-1.328-1.471-2.879-1.637-4.551h3.934c.058 1.265.231 2.488.5 3.651zm.553 1.917c.342.976.768 1.881 1.257 2.712-1.223-.49-2.326-1.211-3.256-2.115.636-.229 1.299-.435 1.999-.597zm9.924 0c.7.163 1.362.367 1.999.597-.931.903-2.034 1.625-3.257 2.116.489-.832.915-1.737 1.258-2.713zm.553-1.917c.27-1.163.442-2.386.501-3.651h3.934c-.167 1.672-.748 3.223-1.638 4.551-.877-.358-1.81-.664-2.797-.9zm.501-5.651c-.058-1.251-.229-2.46-.492-3.611.992-.237 1.929-.546 2.809-.907.877 1.321 1.451 2.86 1.616 4.518h-3.933z"/></svg>
+                                    </a>
+                                {{/if}}
+                            {{/foreach}}
+                        </div> --}}
+                    </div>
+                </div>
+
+                <!-- Feature Image -->
+                {{#post}}
+                    {{#if feature_image}}
+                        <div style="margin: 0 auto; max-width: 300px;">
+                            <img src="{{feature_image}}" alt="{{title}}" style="width: 100%; height: auto; border-radius: 8px;">
+                        </div>
+                    {{/if}}
+                {{/post}}
+            </div>
+
+            {{> "related-posts"}}
+
+            {{#post}}
+                {{> "comments"}}
+            {{/post}}
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const links = document.querySelectorAll(".gh-content link a");
+                    links.forEach(link => {
+                        link.setAttribute("target", "_blank");
+                        link.setAttribute("rel", "noopener noreferrer");
+                    });
+                });
+            </script>
+
+            <style>
+                .gh-content link a {
+                    color: #0000FF !important;
+                    text-decoration: none;
+                }
+                
+                .gh-content link a:hover {
+                    color:#0066cc !important;
+                }
+            </style>
+        </article>
+    {{/post}}
+</main>

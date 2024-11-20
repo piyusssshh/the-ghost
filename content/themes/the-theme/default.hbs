@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+
+    <style>
+        /* Remove underlines from home page cards and links */
+        .gh-card-link,
+        .gh-card-title a,
+        .gh-card-excerpt a,
+        .gh-card-tag,
+        .gh-card-meta a,
+        .gh-feed a {
+            text-decoration: none !important;
+        }
+
+        /* Override the global link styles for home page */
+        .home-template a {
+            text-decoration: none !important;
+        }
+
+        /* Keep hover states clean */
+        .gh-card-link:hover,
+        .gh-card-title a:hover,
+        .gh-card-tag:hover {
+            text-decoration: none !important;
+            opacity: 0.8;
+        }
+
+        body,
+        .gh-site,
+        .gh-head,
+        .gh-main,
+        footer {
+            background-color: white !important;
+        }
+    </style>
+
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}" style="background-color: white;">
+<div class="gh-site">
+
+<header id="gh-head" class="gh-head gh-outer" style="position: sticky; top: 0; background-color: white; z-index: 1000;">
+    <div class="gh-head-inner gh-inner" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        <div class="gh-head-brand" style="display: flex; align-items: center; flex-shrink: 0;">
+            <div class="gh-head-brand-wrapper">
+                {{#is "home"}}<h1 class="gh-head-logo">{{/is}}
+                <a {{^is "home"}}class="gh-head-logo"{{/is}} href="{{@site.url}}">
+                    {{#if @site.logo}}
+                        <img src="{{@site.logo}}" alt="{{@site.title}}" style="max-height: 50px;">
+                        {{#if @custom.white_publication_logo_for_transparent_header}}
+                            <img src="{{@custom.white_publication_logo_for_transparent_header}}" alt="{{@site.title}}" style="max-height: 50px;">
+                        {{/if}}
+                    {{else}}
+                        {{@site.title}}
+                    {{/if}}
+                </a>
+                {{#is "home"}}</h1>{{/is}}
+            </div>
+            <button class="gh-burger"></button>
+        </div>
+
+        <!-- Adjusted navigation -->
+        <nav class="gh-head-menu" style="flex-grow: 1; display: flex; justify-content: flex-end;">
+            <ul class="nav" style="display: flex; list-style: none; margin: 0; padding: 0; gap: 20px;">
+                <li class="nav-home"><a href="https://viasocket.com/">Home</a></li>
+                <li class="nav-home"><a href="https://viasocket.com/faq/pricing">Pricing</a></li>
+                <li class="nav-support"><a href="https://viasocket.com/support">Support</a></li>
+                <li class="nav-hiring"><a href="https://viasocket.com/discovery">Discovery</a></li>
+                <li class="nav-login"><a href="https://viasocket.com/login" style="padding: 8px 16px; border: 1px solid #333; text-decoration: none; color: #333;">Login</a></li>
+                <li class="nav-signup"><a href="https://viasocket.com/signup" style="padding: 8px 16px; border: 1px solid #333; text-decoration: none; color: #333; background-color:oklch(0.59155 0.202026 21.2388);">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+    <!-- Content Section -->
+    <main class="gh-main" style="background-color:white display: block; width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <div class="gh-content" style="display: block; width: 100%; max-width: 900px; margin: 0 auto;">
+            {{{body}}}
+        </div>
+    </main>
+
+
+<footer style="width: 100%; padding: 0;">
+  <div style="display: flex; align-items: stretch;">
+    <!-- Logo Section - Removed border-right -->
+    <div style="padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+      <!-- Viasocket Logo -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <a href="https://viasocket.com/" target="_blank">
+          <img src="https://viasocket.com/assets/brand/socket_fav_dark.svg" alt="viasocket" />
+        </a>
+        
+        <!-- Copyright Text -->
+        <p style="margin-top: 1rem; text-align: center;">
+          &copy; 2024 viasocket<br />All rights reserved
+        </p>
+      </div>
+      
+      <!-- Walkover Image and Text -->
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>A product of</span>
+        <a target="_blank" href="https://walkover.in" style="display: flex; align-items: center;">
+          <img src="https://viasocket.com/assets/brand/walkover.svg" alt="Walkover Logo" style="margin-right: 0.25rem;" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Links Section -->
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem;">
+      <!-- First Row -->
+      <div style="display: flex; justify-content: space-between;">
+        <!-- Compare Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Compare</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a href="https://viasocket.com/faq/viasocket-vs-zapier" target="_blank">Viasocket vs Zapier</a></li>
+            <li><a href="https://viasocket.com/faq/viasocket-vs-make" target="_blank">Viasocket vs Make</a></li>
+            <li><a href="https://viasocket.com/faq/viasocket-vs-pabbly" target="_blank">Viasocket vs Pabbly</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Company</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a href="https://walkover.in/" target="_blank">About</a></li>
+            <li><a href="https://walkover.in/careers" target="_blank">We are hiring</a></li>
+            <li><a href="https://viasocket.com/terms" target="_blank">Terms of Policy</a></li>
+            <li><a href="https://viasocket.com/privacy" target="_blank">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Get Help Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Get Help</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a href="https://calendly.com/rpaliwal71/15-mins" target="_blank">Startups Policy</a></li>
+            <li><a href="https://calendly.com/rpaliwal71/15-mins" target="_blank">Talk to Sales</a></li>
+            <li><a href="https://viasocket.com/experts" target="_blank">Hire an Expert</a></li>
+            <li><a href="https://roadmap.viasocket.com/b/n0elp3vg/feature-ide" target="_blank">Request a feature</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Second Row -->
+      <div style="display: flex; justify-content: space-between;">
+        <!-- Solutions Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Solutions</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a href="https://viasocket.com/integrations" target="_blank">Integrations</a></li>
+            <li><a href="https://cal.id/team/bring-your-app-on-viasocket-marketplace" target="_blank">List your app on our marketplace</a></li>
+          </ul>
+        </div>
+
+        <!-- Learn Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Learn</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><a href="https://viasocket.com/blog" target="_blank">Blog</a></li>
+            <li><a href="https://viasocket.com/faq/case-studies" target="_blank">Client Stories</a></li>
+            <li><a href="https://viasocket.com/faq/help-section" target="_blank">Knowledge Base</a></li>
+            <li><a href="https://viasocket.com/community/" target="_blank">Community</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Section -->
+        <div style="flex: 1; padding: 0 1rem;">
+          <h5 style="font-size: 16px;">Social</h5>
+          <ul style="list-style: none; padding-left: 0;">
+             <li><a href="https://www.youtube.com/@viasocket" target="_blank" class="text-dark">YouTube</a></li>
+                  <li><a href="https://x.com/viasocket?mx=2" target="_blank" class="text-dark">Twitter</a></li>
+                  <li><a href="https://www.instagram.com/walkover.inc/?igsh=MWEyZnptZmw3Z3phOQ%3D%3D" target="_blank" class="text-dark">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</div>
+
+{{#is "post, page"}}
+    {{> "pswp"}}
+{{/is}}
+
+<script src="{{asset "built/main.min.js"}}"></script>
+
+{{ghost_foot}}
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+# Dependency directories
+node_modules/
+# Ignore node_modules directories in all subdirectories
+**/node_modules/
+*/node_modules/
